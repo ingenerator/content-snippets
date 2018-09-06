@@ -10,7 +10,7 @@ namespace Ingenerator\ContentSnippets\Repository;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\UndefinedSnippetException;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
-use Ingenerator\ContentSnippets\Repository\AbstractArrayRepository;
+use Ingenerator\PHPUtils\Repository\AbstractArrayRepository;
 
 class ArrayContentSnippetRepository extends AbstractArrayRepository implements ContentSnippetRepository
 {
@@ -33,14 +33,6 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
     protected static function getEntityBaseClass()
     {
         return ContentSnippet::class;
-    }
-
-    protected static function stubEntity(array $data)
-    {
-        $snippet = new ContentSnippet;
-        ObjectPropertyPopulator::assignHash($snippet, $data);
-
-        return $snippet;
     }
 
     public function listAll()
