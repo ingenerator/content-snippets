@@ -10,7 +10,7 @@ namespace Ingenerator\ContentSnippets\Repository;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\UndefinedSnippetException;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
-use test\mock\PressAccreditation\Repository\AbstractArrayRepository;
+use Ingenerator\ContentSnippets\Repository\AbstractArrayRepository;
 
 class ArrayContentSnippetRepository extends AbstractArrayRepository implements ContentSnippetRepository
 {
