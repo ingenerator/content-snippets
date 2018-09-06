@@ -16,12 +16,10 @@ file_put_contents(
 Kohana_Exception::$error_view = 'text-error';
 
 // Require fake session implementation from Koharness to avoid errors in unit tests
-require_once __DIR__.'/../vendor/kohana/koharness/helper_classes/Session/Fake.php';
-\Session::$default = 'fake';
-\Session::$instances['fake'] = new Session_Fake;
+\Session::$default = 'array';
 
 // Autoload mocks and test-support helpers that should not autoload in the main app
 $mock_loader = new \Composer\Autoload\ClassLoader;
-$mock_loader->addPsr4('test\\mock\\Ingenerator\\KohanaExtras\\', [__DIR__.'/mock/']);
-$mock_loader->addPsr4('test\\unit\\Ingenerator\\KohanaExtras\\', [__DIR__.'/unit/']);
+$mock_loader->addPsr4('test\\mock\\Ingenerator\\ContentSnippets\\', [__DIR__.'/mock/']);
+$mock_loader->addPsr4('test\\unit\\Ingenerator\\ContentSnippets\\', [__DIR__.'/unit/']);
 $mock_loader->register();
