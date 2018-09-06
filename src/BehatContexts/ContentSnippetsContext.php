@@ -64,7 +64,7 @@ class ContentSnippetsContext extends RawMinkContext
     {
         $element = $this->assertSession()->elementExists('css', $selector);
         $actual  = trim($element->getHtml());
-        \PHPUnit_Framework_Assert::assertEquals($expect->getRaw(), $actual);
+        \PHPUnit\Framework\Assert::assertEquals($expect->getRaw(), $actual);
     }
 
 }

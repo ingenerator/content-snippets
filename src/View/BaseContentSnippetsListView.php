@@ -44,10 +44,11 @@ abstract class BaseContentSnippetsListView extends AbstractViewModel
                 'display_name'    => $snippet->getDisplayName(),
                 'content_excerpt' => $this->formatExcerpt($snippet),
                 'has_content'     => $snippet->hasContent(),
-                'row_class'       => $snippet->hasContent() ? '' : 'warning'
+                'row_class'       => $snippet->hasContent() ? '' : 'warning',
             ];
         }
         ksort($rows);
+
         return array_values($rows);
     }
 

@@ -11,7 +11,7 @@ use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\Repository\ArrayContentSnippetRepository;
 use Ingenerator\ContentSnippets\View\BaseContentSnippetsListView;
 
-class ContentSnippetsListViewTest extends \PHPUnit_Framework_TestCase
+class ContentSnippetsListViewTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \Ingenerator\ContentSnippets\Repository\ArrayContentSnippetRepository
@@ -29,12 +29,12 @@ class ContentSnippetsListViewTest extends \PHPUnit_Framework_TestCase
             [
                 'slug'         => 'something',
                 'display_name' => 'Our - First one',
-                'content'      => '<p>Here is the introductory text</p>'
+                'content'      => '<p>Here is the introductory text</p>',
             ],
             [
                 'slug'         => 'something-else',
                 'display_name' => 'First alphabetically',
-                'content'      => '<h3>This one has</h3><p>A lot of longer text and it goes on and on for ages with loads of content that would blow up the table</p>'
+                'content'      => '<h3>This one has</h3><p>A lot of longer text and it goes on and on for ages with loads of content that would blow up the table</p>',
             ],
             [
                 'slug'         => 'new-one',
@@ -65,7 +65,7 @@ class ContentSnippetsListViewTest extends \PHPUnit_Framework_TestCase
                     'content_excerpt' => 'Here is the introductory text',
                     'has_content'     => TRUE,
                     'row_class'       => '',
-                ]
+                ],
             ],
             $this->newSubject()->snippet_rows
         );

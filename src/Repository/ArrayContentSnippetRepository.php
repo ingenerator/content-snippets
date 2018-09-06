@@ -10,10 +10,25 @@ namespace Ingenerator\ContentSnippets\Repository;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\UndefinedSnippetException;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
-use test\mock\Teamdetails\Repository\AbstractArrayRepository;
+use test\mock\PressAccreditation\Repository\AbstractArrayRepository;
 
 class ArrayContentSnippetRepository extends AbstractArrayRepository implements ContentSnippetRepository
 {
+
+    /**
+     * @param string[] $content_strings as slug => content
+     *
+     * @return ArrayContentSnippetRepository
+     */
+    public static function withSnippetContentHash(array $content_strings)
+    {
+        $snippets = [];
+        foreach ($content_strings as $slug => $content) {
+            $snippets[] = ['slug' => $slug, 'content' => $content];
+        }
+
+        return static::withList($snippets);
+    }
 
     protected static function getEntityBaseClass()
     {
@@ -24,6 +39,7 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
     {
         $snippet = new ContentSnippet;
         ObjectPropertyPopulator::assignHash($snippet, $data);
+
         return $snippet;
     }
 
@@ -47,6 +63,7 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
         if ( ! $entity) {
             throw new UndefinedSnippetException($slug);
         }
+
         return $entity;
     }
 

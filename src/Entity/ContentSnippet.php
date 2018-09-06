@@ -62,6 +62,7 @@ class ContentSnippet
         if ($content === NULL) {
             return FALSE;
         }
+
         return $content !== strip_tags($content);
     }
 

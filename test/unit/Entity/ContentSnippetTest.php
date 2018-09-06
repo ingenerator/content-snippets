@@ -10,7 +10,7 @@ namespace test\unit\Ingenerator\ContentSnippets\Entity;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
 
-class ContentSnippetTest extends \PHPUnit_Framework_TestCase
+class ContentSnippetTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -77,6 +77,7 @@ class ContentSnippetTest extends \PHPUnit_Framework_TestCase
     {
         $snippet = new ContentSnippet;
         ObjectPropertyPopulator::assignHash($snippet, $properties);
+
         return $snippet;
     }
 

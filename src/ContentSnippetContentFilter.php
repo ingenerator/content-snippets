@@ -12,6 +12,7 @@ use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 class ContentSnippetContentFilter
 {
     const MSG_NO_HTML = 'This snippet does not accept HTML content, please use plain text.';
+
     /**
      * @var \HTMLPurifier
      */
@@ -32,11 +33,12 @@ class ContentSnippetContentFilter
         if (ContentSnippet::isHtmlString($new_content)) {
             if ($snippet->allowsHtml()) {
                 $cleaned = $this->cleanHtmlContent($new_content);
+
                 return [
                     'cleaned_content' => $cleaned,
                     'is_valid'        => TRUE,
                     'error_msg'       => NULL,
-                    'was_cleaned'     => ($cleaned !== $new_content)
+                    'was_cleaned'     => ($cleaned !== $new_content),
                 ];
             } else {
                 return [
@@ -51,7 +53,7 @@ class ContentSnippetContentFilter
                 'cleaned_content' => $new_content,
                 'is_valid'        => TRUE,
                 'error_msg'       => NULL,
-                'was_cleaned'     => FALSE
+                'was_cleaned'     => FALSE,
             ];
         }
     }

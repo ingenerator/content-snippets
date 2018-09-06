@@ -12,7 +12,7 @@ use Ingenerator\ContentSnippets\ContentSnippetsDependencyFactory;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
 
-class ContentSnippetContentFilterTest extends \PHPUnit_Framework_TestCase
+class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -54,7 +54,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit_Framework_TestCase
                 'cleaned_content' => '<p>this should not be HTML!</p>',
                 'is_valid'        => FALSE,
                 'error_msg'       => ContentSnippetContentFilter::MSG_NO_HTML,
-                'was_cleaned'     => FALSE
+                'was_cleaned'     => FALSE,
             ],
             $result
         );
@@ -74,15 +74,15 @@ class ContentSnippetContentFilterTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 '<div>unclosed tags',
-                '<div>unclosed tags</div>'
+                '<div>unclosed tags</div>',
             ],
             [
                 '<p><a href="foo"><div>Invalid block child</div></a></p>',
-                '<p><a href="foo"></a></p><div><a href="foo">Invalid block child</a></div><a href="foo"></a>'
+                '<p><a href="foo"></a></p><div><a href="foo">Invalid block child</a></div><a href="foo"></a>',
             ],
             [
                 'extra closing tag</div>',
-                'extra closing tag'
+                'extra closing tag',
             ],
         ];
     }
@@ -103,7 +103,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit_Framework_TestCase
                 'cleaned_content' => $expect,
                 'is_valid'        => TRUE,
                 'error_msg'       => NULL,
-                'was_cleaned'     => TRUE
+                'was_cleaned'     => TRUE,
             ],
             $result
         );
@@ -152,7 +152,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit_Framework_TestCase
                 'cleaned_content' => '<p>but this image is offsite</p>',
                 'is_valid'        => TRUE,
                 'error_msg'       => NULL,
-                'was_cleaned'     => TRUE
+                'was_cleaned'     => TRUE,
             ],
             $result
         );
@@ -207,7 +207,7 @@ HTML;
                 'cleaned_content' => $expect_content,
                 'is_valid'        => TRUE,
                 'error_msg'       => NULL,
-                'was_cleaned'     => FALSE
+                'was_cleaned'     => FALSE,
             ],
             $this->newSubject()->filterContent($snippet, $expect_content)
         );
@@ -222,6 +222,7 @@ HTML;
     {
         $snippet = new ContentSnippet;
         ObjectPropertyPopulator::assignHash($snippet, $properties);
+
         return $snippet;
     }
 

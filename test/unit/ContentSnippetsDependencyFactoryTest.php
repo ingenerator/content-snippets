@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Ingenerator\ContentSnippets\ContentSnippetsDependencyFactory;
 use Ingenerator\KohanaExtras\DependencyContainer\DependencyContainer;
 
-class ContentSnippetsDependencyFactoryTest extends \PHPUnit_Framework_TestCase
+class ContentSnippetsDependencyFactoryTest extends \PHPUnit\Framework\TestCase
 {
 
     public function provider_service_names()
@@ -20,8 +20,8 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit_Framework_TestCase
             [
                 '_include' => [
                     ContentSnippetsDependencyFactory::definitions(),
-                    ContentSnippetsDependencyFactory::controllerDefinitions()
-                ]
+                    ContentSnippetsDependencyFactory::controllerDefinitions(),
+                ],
             ]
         );
 
@@ -29,6 +29,7 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit_Framework_TestCase
         foreach ($container->listServices() as $service_key) {
             $services[] = [$service_key];
         }
+
         return $services;
     }
 
@@ -63,6 +64,7 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit_Framework_TestCase
                 ],
             ];
         }
+
         return $definitions;
     }
 
@@ -79,6 +81,7 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit_Framework_TestCase
             // of required arguments
             eval('class '.$dummy_name.' extends '.$dummy_name.'Raw { public function __construct() {} }');
         }
+
         return $dummy_name;
     }
 

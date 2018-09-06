@@ -20,7 +20,7 @@ class ContentSnippetsDependencyFactory
                     '_settings' => [
                         'class'     => ContentSnippetContentFilter::class,
                         'arguments' => [
-                            '%content_snippets.html_purifier.purifier%'
+                            '%content_snippets.html_purifier.purifier%',
                         ],
                     ],
                 ],
@@ -45,11 +45,11 @@ class ContentSnippetsDependencyFactory
                     '_settings' => [
                         'class'     => DoctrineContentSnippetRepository::class,
                         'arguments' => [
-                            '%doctrine.entity_manager%'
-                        ]
-                    ]
-                ]
-            ]
+                            '%doctrine.entity_manager%',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
