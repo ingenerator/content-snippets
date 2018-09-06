@@ -127,7 +127,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @testWith ["/assets/an/image.jpg"]
      */
-    public function test_it_allows_local_images_and_from_teamdetails_domains($img_src)
+    public function test_it_allows_local_images($img_src)
     {
         $this->assertFiltersValidAndNotModified(
             '<p><img src="'.$img_src.'" alt="I have an alt"></p>',
@@ -139,7 +139,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
      * @testWith ["http://external.domain/assets/an/image.jpg"]
      *           ["https://external.domain/assets/an/image.jpg"]
      *           ["//scheme.relative/but/still/external"]
-     *           ["http://demo.teamdetails.com/my.jpg"]
+     *           ["http://any.domain/my.jpg"]
      */
     public function test_it_does_not_allow_remote_or_http_images($img_src)
     {
@@ -158,20 +158,20 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function test_it_allows_complex_current_fringe_homepage_content()
+    public function test_it_allows_complex_html_content()
     {
         // to resolve: inline-block on the links
         $html = <<<'HTML'
-<p>Welcome to the Fringe! <strong>We provide support and the like</strong></p>
+<p>Welcome to our site! <strong>We provide support and the like</strong></p>
 <p>
-    For more info visit us <a href="https://www.edfringe.com/learn/work-with-us">www.edfringe.com</a>
+    For more info visit us <a href="https://our.site.com/learn/work-with-us">www.oursite.com</a>
     or
-    <a href="https://www.edfringe.com/learn/work-with-us" class="btn btn-primary btn-block">Find out more <i class="fa fa-external-link"></i></a>
+    <a href="https://our.site.com/learn/work-with-us" class="btn btn-primary btn-block">Find out more <i class="fa fa-external-link"></i></a>
     or email
-    <a href="mailto:recruitment@edfringe.com">recruitment@edfringe.com</a> or call (+44) 0131 226 0026
+    <a href="mailto:us@oursite.com">us@oursite.com</a> or call (+44) 0131 123 1234
 </p>
 <hr><div>
-<img alt="edfringe" src="/assets/sites/edfringe/edfringe_highlighter_logo.png" style="width:auto;height:90px;margin-right:20px;"><a href="http://www.gov.uk/government/collections/disability-confident-campaign" target="_blank" style="margin-right:20px;margin-bottom:20px;" rel="noreferrer noopener">
+<img alt="us" src="/assets/sites/us/our_logo.png" style="width:auto;height:90px;margin-right:20px;"><a href="http://www.gov.uk/government/collections/disability-confident-campaign" target="_blank" style="margin-right:20px;margin-bottom:20px;" rel="noreferrer noopener">
 <img alt="Disability Confident Employer" src="/assets/scheme_logos/disability_confident_employer.png" style="width:auto;height:90px;"></a>
 <a href="http://www.livingwage.org.uk/" target="_blank" style="margin-bottom:20px;" rel="noreferrer noopener"><img alt="Living Wage Employer" src="/assets/scheme_logos/living_wage_employer.jpeg" style="width:auto;height:90px;"></a>
 </div>
