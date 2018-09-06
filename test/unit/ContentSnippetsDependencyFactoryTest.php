@@ -51,7 +51,7 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit\Framework\TestCase
                 ],
             ]
         );
-        $container->get($service_name);
+        $this->assertInternalType('object', $container->get($service_name));
     }
 
     protected function dummy_dependencies(array $dependencies)

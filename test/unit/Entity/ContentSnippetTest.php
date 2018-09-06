@@ -55,16 +55,22 @@ class ContentSnippetTest extends \PHPUnit\Framework\TestCase
         $content,
         $should_throw
     ) {
+        $e = NULL;
         $snippet = $this->newSubject(['allows_html' => $allowed]);
         try {
             $snippet->setContent($content);
-            if ($should_throw) {
-                $this->fail('Should throw when assigning '.$content);
-            }
         } catch (\InvalidArgumentException $e) {
-            if ( ! $should_throw) {
-                $this->fail('Should not throw when assigning '.$content);
-            }
+            // Just capture it
+        }
+
+        if ($should_throw) {
+            $this->assertInstanceOf(
+                \InvalidArgumentException::class,
+                $e,
+                'Should throw when assigning '.$content
+            );
+        } else {
+            $this->assertNull($e, 'Should not throw when assigning '.$content);
         }
     }
 
