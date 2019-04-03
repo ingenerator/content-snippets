@@ -13,15 +13,15 @@
   ],
   "require": {
     "ezyang/htmlpurifier": "^4.6",
-    "php": "^5.5||^7.2",
-    "ingenerator/kohana-core": "^4.2",
-    "ingenerator/kohana-extras": "^0.3.3||^0.4",
-    "ingenerator/kohana-view": "^4.1"
+    "php": "^7.2",
+    "ingenerator/kohana-core": "^4.3",
+    "ingenerator/kohana-extras": "^1.0",
+    "ingenerator/kohana-view": "^4.3"
   },
   "require-dev": {
     "kohana/koharness": "*@dev",
-    "phpunit/phpunit": "^4.8||^7.0",
-    "johnkary/phpunit-speedtrap": "^1.0||3.0"
+    "phpunit/phpunit": "^7.0",
+    "johnkary/phpunit-speedtrap": "^3.0"
   },
   "repositories": [
     {
