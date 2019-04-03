@@ -63,7 +63,7 @@ class ContentSnippetsContext extends RawMinkContext
     public function assertElementExactHtml($selector, PyStringNode $expect)
     {
         $element = $this->assertSession()->elementExists('css', $selector);
-        $actual  = trim($element->getHtml());
+        $actual  = \trim($element->getHtml());
         \PHPUnit\Framework\Assert::assertEquals($expect->getRaw(), $actual);
     }
 

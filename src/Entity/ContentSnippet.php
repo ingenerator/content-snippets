@@ -63,7 +63,7 @@ class ContentSnippet
             return FALSE;
         }
 
-        return $content !== strip_tags($content);
+        return $content !== \strip_tags($content);
     }
 
     /**

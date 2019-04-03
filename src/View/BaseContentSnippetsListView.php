@@ -47,9 +47,9 @@ abstract class BaseContentSnippetsListView extends AbstractViewModel
                 'row_class'       => $snippet->hasContent() ? '' : 'warning',
             ];
         }
-        ksort($rows);
+        \ksort($rows);
 
-        return array_values($rows);
+        return \array_values($rows);
     }
 
     abstract protected function getEditUrl(ContentSnippet $snippet);
@@ -58,15 +58,15 @@ abstract class BaseContentSnippetsListView extends AbstractViewModel
     {
         $content = $snippet->getContent();
         // Add whitespace before all html tags so enclosed text doesn't bump into each other
-        $content = str_replace('<', ' <', $content);
+        $content = \str_replace('<', ' <', $content);
         // Remove the tags
-        $content = strip_tags($content);
+        $content = \strip_tags($content);
         // Close up double spaces and remove leading and trailing space
-        $content = trim(preg_replace('/\s+/', ' ', $content));
+        $content = \trim(\preg_replace('/\s+/', ' ', $content));
         // Reduce it to the word limit if required
-        $words = explode(' ', $content);
-        if (count($words) > $this->excerpt_word_limit) {
-            return implode(' ', array_slice($words, 0, $this->excerpt_word_limit)).'…';
+        $words = \explode(' ', $content);
+        if (\count($words) > $this->excerpt_word_limit) {
+            return \implode(' ', \array_slice($words, 0, $this->excerpt_word_limit)).'…';
         } else {
             return $content;
         }

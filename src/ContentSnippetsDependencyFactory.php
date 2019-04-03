@@ -66,7 +66,7 @@ class ContentSnippetsDependencyFactory
                 'Attr.AllowedFrameTargets'                => ['_blank'],
                 'AutoFormat.RemoveEmpty.RemoveNbsp'       => TRUE,
                 'AutoFormat.RemoveSpansWithoutAttributes' => TRUE,
-                'Cache.SerializerPath'                    => sys_get_temp_dir(),
+                'Cache.SerializerPath'                    => \sys_get_temp_dir(),
                 'Core.RemoveProcessingInstructions'       => TRUE,
                 'HTML.Doctype'                            => 'HTML 4.01 Transitional',
                 'URI.AllowedSchemes'                      => ['http', 'https', 'mailto', 'tel'],
