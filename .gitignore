@@ -4,3 +4,4 @@ thumbs.db
 Thumbs.db
 /koharness_bootstrap.php
 /.idea
+.phpunit.result.cache

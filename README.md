@@ -1,9 +1,6 @@
 content-snippets provides entities, repository and common code for admin-editable snippets
 to be displayed on a site.
 
-[![Build Status](https://travis-ci.org/ingenerator/content-snippets.svg?branch=0.1.x)](https://travis-ci.org/ingenerator/content-snippets)
-
-
 # Installing content-snippets
 
 This isn't in packagist yet : you'll need to add our package repository to your composer.json:
@@ -26,7 +23,7 @@ this is primarily an internally-focused package so we may have particular requir
 
 # Contributors
 
-This package has been sponsored by [inGenerator Ltd](http://www.ingenerator.com)
+This package has been sponsored by [inGenerator Ltd](https://www.ingenerator.com)
 
 * Andrew Coulton [acoulton](https://github.com/acoulton) - Lead developer
 

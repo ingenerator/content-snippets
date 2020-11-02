@@ -182,7 +182,7 @@ HTML;
         );
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->purifier = new \HTMLPurifier(ContentSnippetsDependencyFactory::makePurifierConfig());
