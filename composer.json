@@ -8,19 +8,19 @@
     {
       "name": "Andrew Coulton",
       "email": "andrew@ingenerator.com",
-      "homepage": "http://ingenerator.com"
+      "homepage": "https://ingenerator.com"
     }
   ],
   "require": {
-    "ezyang/htmlpurifier": "^4.6",
-    "php": "^7.2",
-    "ingenerator/kohana-core": "^4.3",
-    "ingenerator/kohana-extras": "^1.0|^2.0",
-    "ingenerator/kohana-view": "^4.3"
+    "ezyang/htmlpurifier": "^4.13",
+    "php": "^7.4",
+    "ingenerator/kohana-core": "^4.7",
+    "ingenerator/kohana-extras": "^2.0",
+    "ingenerator/kohana-view": "^4.4"
   },
   "require-dev": {
-    "kohana/koharness": "*@dev",
-    "phpunit/phpunit": "^7.0",
+    "kohana/koharness": "dev-master",
+    "phpunit/phpunit": "^9.4",
     "johnkary/phpunit-speedtrap": "^3.0"
   },
   "repositories": [

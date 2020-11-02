@@ -36,11 +36,11 @@ class ContentSnippetTest extends \PHPUnit\Framework\TestCase
         $orig_data['updated_at'] = new \DateTimeImmutable($orig_data['updated_at']);
         $snippet                 = $this->newSubject($orig_data);
         $snippet->setContent($content);
-        $this->assertEquals(
+        $this->assertEqualsWithDelta(
             new \DateTimeImmutable($expect),
             $snippet->getUpdatedAt(),
-            'Updated time should match '.$expect.' to within 1 second',
-            1
+            1,
+            'Updated time should match '.$expect.' to within 1 second'
         );
     }
 
