@@ -58,7 +58,7 @@ abstract class BaseContentSnippetsListView extends AbstractViewModel
     {
         $content = $snippet->getContent();
         // Add whitespace before all html tags so enclosed text doesn't bump into each other
-        $content = \str_replace('<', ' <', $content);
+        $content = \str_replace('<', ' <', (string) $content);
         // Remove the tags
         $content = \strip_tags($content);
         // Close up double spaces and remove leading and trailing space
