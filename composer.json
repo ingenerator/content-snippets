@@ -13,7 +13,7 @@
   ],
   "require": {
     "composer/installers": "^1.9",
-    "ezyang/htmlpurifier": "^4.13",
+    "ezyang/htmlpurifier": "^4.15",
     "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
     "ingenerator/kohana-core": "^4.7",
     "ingenerator/kohana-extras": "^2.0",
