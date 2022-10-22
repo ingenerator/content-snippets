@@ -38,7 +38,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
             ->from(ContentSnippet::class, 'snippet')
             ->where('snippet.slug = :slug')
             ->getQuery()
-            ->useResultCache(TRUE, NULL, ContentSnippet::class.'-'.$slug)
+            ->enableResultCache(TRUE, NULL, 'cs-'.sha1($slug))
             ->setParameter('slug', $slug)
             ->getOneOrNullResult();
         if ( ! $snippet) {
@@ -70,7 +70,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
     {
         $this->em->persist($snippet);
         $this->em->flush($snippet);
-        $this->em->getConfiguration()->getResultCacheImpl()->delete(ContentSnippet::class.'-'.$snippet->getSlug());
+        $this->em->getConfiguration()->getResultCache()->deleteItem('cs-'.sha1($snippet->getSlug()));
     }
 
 
