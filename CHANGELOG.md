@@ -1,5 +1,7 @@
 ### Unreleased
 
+### v1.3.1 (2022-10-24)
+
 * Use cache keys which avoid reserved characters
 
 ### v1.3.0 (2022-10-17)
