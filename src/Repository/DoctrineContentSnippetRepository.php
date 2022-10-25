@@ -38,7 +38,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
             ->from(ContentSnippet::class, 'snippet')
             ->where('snippet.slug = :slug')
             ->getQuery()
-            ->enableResultCache(TRUE, NULL, 'cs-'.sha1($slug))
+            ->enableResultCache(NULL, 'cs-'.sha1($slug))
             ->setParameter('slug', $slug)
             ->getOneOrNullResult();
         if ( ! $snippet) {
