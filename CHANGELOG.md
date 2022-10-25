@@ -1,5 +1,9 @@
 ### Unreleased
 
+### v1.3.2 (2022-10-25)
+
+* Fix cache lifetime argument missed in v1.3.1
+
 ### v1.3.1 (2022-10-24)
 
 * Use cache keys which avoid reserved characters
