@@ -1,5 +1,10 @@
 ### Unreleased
 
+### v1.4.0 (2024-02-08)
+
+* Drop support for PHP 8.0 & 8.1
+* Support kohana-extras v3
+
 ### v1.3.2 (2022-10-25)
 
 * Fix cache lifetime argument missed in v1.3.1
