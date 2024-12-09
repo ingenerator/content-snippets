@@ -7,49 +7,54 @@
 namespace Ingenerator\ContentSnippets\Entity;
 
 
-/**
- * @Entity
- * @ChangeTrackingPolicy("DEFERRED_EXPLICIT")
- * @Table(name="content_snippets")
- */
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\ChangeTrackingPolicy;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
+
+#[Entity]
+#[ChangeTrackingPolicy('DEFERRED_EXPLICIT')]
+#[Table(name: 'content_snippets')]
 class ContentSnippet
 {
 
     /**
      * @var string
-     * @Id
-     * @Column(type="string")
      */
+    #[Id]
+    #[Column(type: Types::STRING)]
     protected $slug;
 
     /**
      * @var string
-     * @Column(type="string")
      */
+    #[Column(type: Types::STRING)]
     protected $display_name;
 
     /**
      * @var string
-     * @Column(type="text", nullable=true)
      */
+    #[Column(type: Types::TEXT, nullable: TRUE)]
     protected $help_text;
 
     /**
      * @var bool
-     * @Column(type="boolean")
      */
+    #[Column(type: Types::BOOLEAN)]
     protected $allows_html;
 
     /**
      * @var string
-     * @Column(type="text", nullable=true)
      */
+    #[Column(type: Types::TEXT, nullable: TRUE)]
     protected $content;
 
     /**
      * @var \DateTimeImmutable
-     * @Column(type="datetime_immutable")
      */
+    #[Column(type: Types::DATETIME_IMMUTABLE)]
     protected $updated_at;
 
     /**

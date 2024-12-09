@@ -1,5 +1,7 @@
 ### Unreleased
 
+* [BREAKING] Use doctrine attributes instead of annotations for entity metadata
+
 ### v1.5.0 (2024-10-01)
 
 * Support PHP 8.3
