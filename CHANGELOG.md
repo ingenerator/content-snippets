@@ -2,6 +2,9 @@
 
 * [BREAKING] Use doctrine attributes instead of annotations for entity metadata
 * [BREAKING] Add hard parameter and return typehints to all classes
+* [BREAKING] ContentSnippetContentFilter is now an interface, use HtmlPurifierContentFilter for 
+  a runtime implementation. The ->filterContent now returns a ContentFilterResult DTO instead of
+  a plain array.
 
 ### v1.5.0 (2024-10-01)
 

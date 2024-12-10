@@ -4,21 +4,24 @@
  * @licence   proprietary
  */
 
-namespace test\unit\Ingenerator\ContentSnippets;
+namespace test\unit\Ingenerator\ContentFilter\ContentSnippets;
 
 
+use HTMLPurifier;
+use Ingenerator\ContentSnippets\ContentFilter\HtmlPurifierContentFilter;
+use Ingenerator\ContentSnippets\ContentFilterResult;
 use Ingenerator\ContentSnippets\ContentSnippetContentFilter;
 use Ingenerator\ContentSnippets\ContentSnippetsDependencyFactory;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
+use PHPUnit\Framework\TestCase;
 
-class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
+class HtmlPurifierContentFilterTest extends TestCase
 {
 
-    /**
-     * @var \HTMLPurifier
-     */
-    protected $purifier;
+    private HtmlPurifier $purifier;
 
     public function test_it_is_initialisable()
     {
@@ -30,10 +33,8 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         $this->assertFiltersValidAndNotModified(NULL, new ContentSnippet);
     }
 
-    /**
-     * @testWith [true]
-     *           [false]
-     */
+    #[TestWith([TRUE])]
+    #[TestWith([FALSE])]
     public function test_it_returns_unmodified_valid_input_for_plain_text_to_plain_text_or_html_snippet(
         $allow_html
     ) {
@@ -50,12 +51,12 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
             '<p>this should not be HTML!</p>'
         );
         $this->assertEquals(
-            [
-                'cleaned_content' => '<p>this should not be HTML!</p>',
-                'is_valid'        => FALSE,
-                'error_msg'       => ContentSnippetContentFilter::MSG_NO_HTML,
-                'was_cleaned'     => FALSE,
-            ],
+            new ContentFilterResult(
+                cleaned_content: '<p>this should not be HTML!</p>',
+                is_valid: FALSE,
+                error_msg: ContentSnippetContentFilter::MSG_NO_HTML,
+                was_cleaned: FALSE,
+            ),
             $result
         );
 
@@ -69,7 +70,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function provider_invalid_html()
+    public static function provider_invalid_html(): array
     {
         return [
             [
@@ -87,9 +88,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @dataProvider provider_invalid_html
-     */
+    #[DataProvider('provider_invalid_html')]
     public function test_it_returns_modified_valid_input_for_tidied_html_to_html_snippet(
         $input,
         $expect
@@ -99,23 +98,22 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
             $input
         );
         $this->assertEquals(
-            [
-                'cleaned_content' => $expect,
-                'is_valid'        => TRUE,
-                'error_msg'       => NULL,
-                'was_cleaned'     => TRUE,
-            ],
+            new ContentFilterResult(
+                cleaned_content: $expect,
+                is_valid: TRUE,
+                error_msg: NULL,
+                was_cleaned: TRUE,
+            ),
             $result
         );
     }
 
-    /**
-     * @testWith ["http://some.where/else?foo=bar"]
-     *           ["https://some.where/else?foo=bar"]
-     *           ["mailto:me@home.net"]
-     *           ["tel:01315100271"]
-     *           ["/a/local/page"]
-     */
+
+    #[TestWith(["http://some.where/else?foo=bar"])]
+    #[TestWith(["https://some.where/else?foo=bar"])]
+    #[TestWith(["mailto:me@home.net"])]
+    #[TestWith(["tel:01315100271"])]
+    #[TestWith(["/a/local/page"])]
     public function test_it_allows_external_local_tel_and_mailto_links($link_url)
     {
         $this->assertFiltersValidAndNotModified(
@@ -124,9 +122,7 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @testWith ["/assets/an/image.jpg"]
-     */
+    #[TestWith(['assets/an/image.jpg'])]
     public function test_it_allows_local_images($img_src)
     {
         $this->assertFiltersValidAndNotModified(
@@ -135,12 +131,10 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @testWith ["http://external.domain/assets/an/image.jpg"]
-     *           ["https://external.domain/assets/an/image.jpg"]
-     *           ["//scheme.relative/but/still/external"]
-     *           ["http://any.domain/my.jpg"]
-     */
+    #[TestWith(["http://external.domain/assets/an/image.jpg"])]
+    #[TestWith(["https://external.domain/assets/an/image.jpg"])]
+    #[TestWith(["//scheme.relative/but/still/external"])]
+    #[TestWith(["http://any.domain/my.jpg"])]
     public function test_it_does_not_allow_remote_or_http_images($img_src)
     {
         $result = $this->newSubject()->filterContent(
@@ -148,12 +142,12 @@ class ContentSnippetContentFilterTest extends \PHPUnit\Framework\TestCase
             '<p><img src="'.$img_src.'" alt="I have an alt">but this image is offsite</p>'
         );
         $this->assertEquals(
-            [
-                'cleaned_content' => '<p>but this image is offsite</p>',
-                'is_valid'        => TRUE,
-                'error_msg'       => NULL,
-                'was_cleaned'     => TRUE,
-            ],
+            new ContentFilterResult(
+                cleaned_content: '<p>but this image is offsite</p>',
+                is_valid: TRUE,
+                error_msg: NULL,
+                was_cleaned: TRUE,
+            ),
             $result
         );
     }
@@ -185,40 +179,28 @@ HTML;
     public function setUp(): void
     {
         parent::setUp();
-        $this->purifier = new \HTMLPurifier(ContentSnippetsDependencyFactory::makePurifierConfig());
+        $this->purifier = new HTMLPurifier(ContentSnippetsDependencyFactory::makePurifierConfig());
     }
 
-    /**
-     * @return \Ingenerator\ContentSnippets\ContentSnippetContentFilter
-     */
-    public function newSubject()
+    public function newSubject(): HtmlPurifierContentFilter
     {
-        return new ContentSnippetContentFilter($this->purifier);
+        return new HtmlPurifierContentFilter($this->purifier);
     }
 
-    /**
-     * @param $expect_content
-     * @param $snippet
-     */
-    protected function assertFiltersValidAndNotModified($expect_content, $snippet)
+    protected function assertFiltersValidAndNotModified(string $content, ContentSnippet $snippet)
     {
         $this->assertEquals(
-            [
-                'cleaned_content' => $expect_content,
-                'is_valid'        => TRUE,
-                'error_msg'       => NULL,
-                'was_cleaned'     => FALSE,
-            ],
-            $this->newSubject()->filterContent($snippet, $expect_content)
+            new ContentFilterResult(
+                cleaned_content: $content,
+                is_valid: TRUE,
+                error_msg: NULL,
+                was_cleaned: FALSE
+            ),
+            $this->newSubject()->filterContent($snippet, $content)
         );
     }
 
-    /**
-     * @param $properties
-     *
-     * @return \Ingenerator\ContentSnippets\Entity\ContentSnippet
-     */
-    protected function givenSnippet($properties)
+    protected function givenSnippet(array $properties): ContentSnippet
     {
         $snippet = new ContentSnippet;
         ObjectPropertyPopulator::assignHash($snippet, $properties);

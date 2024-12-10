@@ -7,7 +7,9 @@
 namespace Ingenerator\ContentSnippets;
 
 
+use HTMLPurifier;
 use HTMLPurifier_Config;
+use Ingenerator\ContentSnippets\ContentFilter\HtmlPurifierContentFilter;
 use Ingenerator\ContentSnippets\Repository\DoctrineContentSnippetRepository;
 use function sys_get_temp_dir;
 
@@ -20,7 +22,7 @@ class ContentSnippetsDependencyFactory
             'content_snippets' => [
                 'content_filter' => [
                     '_settings' => [
-                        'class' => ContentSnippetContentFilter::class,
+                        'class' => HtmlPurifierContentFilter::class,
                         'arguments' => [
                             '%content_snippets.html_purifier.purifier%',
                         ],
@@ -36,7 +38,7 @@ class ContentSnippetsDependencyFactory
                     ],
                     'purifier' => [
                         '_settings' => [
-                            'class' => \HTMLPurifier::class,
+                            'class' => HTMLPurifier::class,
                             'arguments' => [
                                 '%content_snippets.html_purifier.config%',
                             ],
