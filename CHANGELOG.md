@@ -1,6 +1,7 @@
 ### Unreleased
 
 * [BREAKING] Use doctrine attributes instead of annotations for entity metadata
+* [BREAKING] Add hard parameter and return typehints to all classes
 
 ### v1.5.0 (2024-10-01)
 

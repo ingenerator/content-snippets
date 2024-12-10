@@ -13,7 +13,7 @@ use Ingenerator\Pigeonhole\Message;
 class ContentSnippetUpdateMessage extends Message
 {
 
-    public static function updated(ContentSnippet $snippet)
+    public static function updated(ContentSnippet $snippet): ContentSnippetUpdateMessage
     {
         return new static(
             'Success',
@@ -22,7 +22,7 @@ class ContentSnippetUpdateMessage extends Message
         );
     }
 
-    public static function updatedCleaned(ContentSnippet $snippet)
+    public static function updatedCleaned(ContentSnippet $snippet): ContentSnippetUpdateMessage
     {
         return new static(
             'Updated after tidying',

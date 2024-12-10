@@ -10,8 +10,9 @@ namespace test\unit\Ingenerator\ContentSnippets;
 use Doctrine\ORM\EntityManagerInterface;
 use Ingenerator\ContentSnippets\ContentSnippetsDependencyFactory;
 use Ingenerator\KohanaExtras\DependencyContainer\DependencyContainer;
+use PHPUnit\Framework\TestCase;
 
-class ContentSnippetsDependencyFactoryTest extends \PHPUnit\Framework\TestCase
+class ContentSnippetsDependencyFactoryTest extends TestCase
 {
 
     public function provider_service_names()

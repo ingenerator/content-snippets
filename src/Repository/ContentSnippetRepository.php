@@ -13,39 +13,21 @@ interface ContentSnippetRepository
 {
 
     /**
-     * @return ContentSnippet[]
+     * @return list<ContentSnippet>
      */
-    public function listAll();
+    public function listAll(): array;
 
     /**
-     * @param string $slug
-     *
      * @throws \Ingenerator\ContentSnippets\UndefinedSnippetException
-     *
-     * @return ContentSnippet
      */
-    public function load($slug);
+    public function load(string $slug): ContentSnippet;
 
     /**
-     * @param string $slug
-     *
      * @throws \Ingenerator\ContentSnippets\UndefinedSnippetException
-     *
-     * @return string
      */
-    public function getContent($slug);
+    public function getContent(string $slug): ?string;
 
-    /**
-     * @param \Ingenerator\ContentSnippets\Entity\ContentSnippet $snippet
-     *
-     * @return void
-     */
-    public function save(ContentSnippet $snippet);
+    public function save(ContentSnippet $snippet): void;
 
-    /**
-     * @param $slug
-     *
-     * @return bool
-     */
-    public function hasContent($slug);
+    public function hasContent(string $slug): bool;
 }

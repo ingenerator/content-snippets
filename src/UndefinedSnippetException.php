@@ -10,7 +10,7 @@ namespace Ingenerator\ContentSnippets;
 class UndefinedSnippetException extends \InvalidArgumentException
 {
 
-    public function __construct($slug)
+    public function __construct(string $slug)
     {
         parent::__construct('No content snippet defined with the slug '.$slug);
     }

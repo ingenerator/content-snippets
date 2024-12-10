@@ -7,12 +7,15 @@
 namespace Ingenerator\ContentSnippets\Entity;
 
 
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\ChangeTrackingPolicy;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use InvalidArgumentException;
+use function strip_tags;
 
 #[Entity]
 #[ChangeTrackingPolicy('DEFERRED_EXPLICIT')]
@@ -20,124 +23,81 @@ use Doctrine\ORM\Mapping\Table;
 class ContentSnippet
 {
 
-    /**
-     * @var string
-     */
     #[Id]
     #[Column(type: Types::STRING)]
-    protected $slug;
+    protected string $slug;
 
-    /**
-     * @var string
-     */
     #[Column(type: Types::STRING)]
-    protected $display_name;
+    protected string $display_name;
 
-    /**
-     * @var string
-     */
     #[Column(type: Types::TEXT, nullable: TRUE)]
-    protected $help_text;
+    protected ?string $help_text = NULL;
 
-    /**
-     * @var bool
-     */
     #[Column(type: Types::BOOLEAN)]
-    protected $allows_html;
+    protected bool $allows_html = FALSE;
 
-    /**
-     * @var string
-     */
     #[Column(type: Types::TEXT, nullable: TRUE)]
-    protected $content;
+    protected ?string $content = NULL;
 
-    /**
-     * @var \DateTimeImmutable
-     */
     #[Column(type: Types::DATETIME_IMMUTABLE)]
-    protected $updated_at;
+    protected DateTimeImmutable $updated_at;
 
-    /**
-     * @param string $content
-     *
-     * @return bool
-     */
-    public static function isHtmlString($content)
+    public static function isHtmlString(?string $content): bool
     {
         if ($content === NULL) {
             return FALSE;
         }
 
-        return $content !== \strip_tags($content);
+        return $content !== strip_tags($content);
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * @return string
-     */
-    public function getDisplayName()
+    public function getDisplayName(): string
     {
         return $this->display_name;
     }
 
-    /**
-     * @return string
-     */
-    public function getHelpText()
+    public function getHelpText(): ?string
     {
         return $this->help_text;
     }
 
-    /**
-     * @return string
-     */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
-     *
-     * @throws \InvalidArgumentException if passing HTML and the snippet doesn't allow it
+     * @throws InvalidArgumentException if passing HTML and the snippet doesn't allow it
      */
-    public function setContent($content)
+    public function setContent(?string $content): void
     {
-        if (( ! $this->allowsHtml()) AND static::isHtmlString($content)) {
-            throw new \InvalidArgumentException(
+        if (( ! $this->allowsHtml()) and static::isHtmlString($content)) {
+            throw new InvalidArgumentException(
                 'HTML content is not permitted for snippet '.$this->slug
             );
         }
         if ($content !== $this->content) {
-            $this->content    = $content;
-            $this->updated_at = new \DateTimeImmutable;
+            $this->content = $content;
+            $this->updated_at = new DateTimeImmutable;
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function allowsHtml()
+    public function allowsHtml(): bool
     {
         return $this->allows_html;
     }
 
-    public function hasContent()
+    public function hasContent(): bool
     {
         return (bool) $this->content;
     }
 
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updated_at;
     }

@@ -7,10 +7,12 @@
 namespace test\unit\Ingenerator\ContentSnippets\Entity;
 
 
+use DateTimeImmutable;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
+use PHPUnit\Framework\TestCase;
 
-class ContentSnippetTest extends \PHPUnit\Framework\TestCase
+class ContentSnippetTest extends TestCase
 {
 
     /**
@@ -33,11 +35,11 @@ class ContentSnippetTest extends \PHPUnit\Framework\TestCase
         $content,
         $expect
     ) {
-        $orig_data['updated_at'] = new \DateTimeImmutable($orig_data['updated_at']);
+        $orig_data['updated_at'] = new DateTimeImmutable($orig_data['updated_at']);
         $snippet                 = $this->newSubject($orig_data);
         $snippet->setContent($content);
         $this->assertEqualsWithDelta(
-            new \DateTimeImmutable($expect),
+            new DateTimeImmutable($expect),
             $snippet->getUpdatedAt(),
             1,
             'Updated time should match '.$expect.' to within 1 second'
@@ -74,12 +76,7 @@ class ContentSnippetTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    /**
-     * @param array $properties
-     *
-     * @return \Ingenerator\ContentSnippets\Entity\ContentSnippet
-     */
-    protected function newSubject(array $properties = [])
+    protected function newSubject(array $properties = []): ContentSnippet
     {
         $snippet = new ContentSnippet;
         ObjectPropertyPopulator::assignHash($snippet, $properties);
