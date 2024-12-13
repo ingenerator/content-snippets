@@ -9,18 +9,15 @@ namespace Ingenerator\ContentSnippets\Repository;
 
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\UndefinedSnippetException;
-use Ingenerator\PHPUtils\Object\ObjectPropertyPopulator;
 use Ingenerator\PHPUtils\Repository\AbstractArrayRepository;
 
 class ArrayContentSnippetRepository extends AbstractArrayRepository implements ContentSnippetRepository
 {
 
     /**
-     * @param string[] $content_strings as slug => content
-     *
-     * @return ArrayContentSnippetRepository
+     * @param array<string,string> $content_strings as slug => content
      */
-    public static function withSnippetContentHash(array $content_strings)
+    public static function withSnippetContentHash(array $content_strings): self
     {
         $snippets = [];
         foreach ($content_strings as $slug => $content) {
@@ -30,24 +27,23 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
         return static::withList($snippets);
     }
 
-    protected static function getEntityBaseClass()
+    protected static function getEntityBaseClass(): string
     {
         return ContentSnippet::class;
     }
 
-    public function listAll()
+    /**
+     * {@inheritdoc}
+     */
+    public function listAll(): array
     {
         return $this->entities;
     }
 
     /**
-     * @param string $slug
-     *
-     * @throws \Ingenerator\ContentSnippets\UndefinedSnippetException
-     *
-     * @return ContentSnippet
+     * {@inheritdoc}
      */
-    public function load($slug)
+    public function load(string $slug): ContentSnippet
     {
         $entity = $this->findWith(
             function (ContentSnippet $snippet) use ($slug) { return $snippet->getSlug() === $slug; }
@@ -60,23 +56,14 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
     }
 
     /**
-     * @param string $slug
-     *
-     * @throws \Ingenerator\ContentSnippets\UndefinedSnippetException
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getContent($slug)
+    public function getContent(string $slug): ?string
     {
         return $this->load($slug)->getContent();
     }
 
-    /**
-     * @param \Ingenerator\ContentSnippets\Entity\ContentSnippet $snippet
-     *
-     * @return void
-     */
-    public function save(ContentSnippet $snippet)
+    public function save(ContentSnippet $snippet): void
     {
         throw new \BadMethodCallException(__METHOD__.' not implemented');
     }
@@ -84,7 +71,7 @@ class ArrayContentSnippetRepository extends AbstractArrayRepository implements C
     /**
      * {@inheritdoc}
      */
-    public function hasContent($slug)
+    public function hasContent(string $slug): bool
     {
         return $this->load($slug)->hasContent();
     }

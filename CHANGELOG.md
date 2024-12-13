@@ -1,6 +1,13 @@
 ### Unreleased
 
 * [BREAKING] Use doctrine attributes instead of annotations for entity metadata
+* [BREAKING] Add hard parameter and return typehints to all classes
+* [BREAKING] ContentSnippetContentFilter is now an interface, use HtmlPurifierContentFilter for 
+  a runtime implementation. The ->filterContent now returns a ContentFilterResult DTO instead of
+  a plain array.
+* Drop support for PHP 8.2
+* Internal test & config files are now excluded from distribution archives
+* Upgraded to PHPUnit 11 for internal tests
 
 ### v1.5.0 (2024-10-01)
 

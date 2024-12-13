@@ -10,11 +10,13 @@ namespace test\unit\Ingenerator\ContentSnippets;
 use Doctrine\ORM\EntityManagerInterface;
 use Ingenerator\ContentSnippets\ContentSnippetsDependencyFactory;
 use Ingenerator\KohanaExtras\DependencyContainer\DependencyContainer;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 
-class ContentSnippetsDependencyFactoryTest extends \PHPUnit\Framework\TestCase
+class ContentSnippetsDependencyFactoryTest extends TestCase
 {
 
-    public function provider_service_names()
+    public static function provider_service_names()
     {
         $container = new DependencyContainer(
             [
@@ -33,9 +35,7 @@ class ContentSnippetsDependencyFactoryTest extends \PHPUnit\Framework\TestCase
         return $services;
     }
 
-    /**
-     * @dataProvider provider_service_names
-     */
+    #[DataProvider('provider_service_names')]
     public function test_all_service_definitions_are_valid($service_name)
     {
         $container = new DependencyContainer(

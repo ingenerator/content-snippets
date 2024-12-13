@@ -7,43 +7,47 @@
 namespace Ingenerator\ContentSnippets;
 
 
+use HTMLPurifier;
+use HTMLPurifier_Config;
+use Ingenerator\ContentSnippets\ContentFilter\HtmlPurifierContentFilter;
 use Ingenerator\ContentSnippets\Repository\DoctrineContentSnippetRepository;
+use function sys_get_temp_dir;
 
 class ContentSnippetsDependencyFactory
 {
 
-    public static function definitions()
+    public static function definitions(): array
     {
         return [
             'content_snippets' => [
                 'content_filter' => [
                     '_settings' => [
-                        'class'     => ContentSnippetContentFilter::class,
+                        'class' => HtmlPurifierContentFilter::class,
                         'arguments' => [
                             '%content_snippets.html_purifier.purifier%',
                         ],
                     ],
                 ],
-                'html_purifier'  => [
-                    'config'   => [
+                'html_purifier' => [
+                    'config' => [
                         '_settings' => [
-                            'class'       => static::class,
+                            'class' => static::class,
                             'constructor' => 'makePurifierConfig',
-                            'arguments'   => [],
+                            'arguments' => [],
                         ],
                     ],
                     'purifier' => [
                         '_settings' => [
-                            'class'     => \HTMLPurifier::class,
+                            'class' => HTMLPurifier::class,
                             'arguments' => [
                                 '%content_snippets.html_purifier.config%',
                             ],
                         ],
                     ],
                 ],
-                'repository'     => [
+                'repository' => [
                     '_settings' => [
-                        'class'     => DoctrineContentSnippetRepository::class,
+                        'class' => DoctrineContentSnippetRepository::class,
                         'arguments' => [
                             '%doctrine.entity_manager%',
                         ],
@@ -53,25 +57,25 @@ class ContentSnippetsDependencyFactory
         ];
     }
 
-    public static function controllerDefinitions()
+    public static function controllerDefinitions(): array
     {
         return [];
     }
 
-    public static function makePurifierConfig()
+    public static function makePurifierConfig(): HTMLPurifier_Config
     {
-        return \HTMLPurifier_Config::create(
+        return HTMLPurifier_Config::create(
             [
-                'AutoFormat.RemoveEmpty'                  => FALSE,
-                'Attr.AllowedFrameTargets'                => ['_blank'],
-                'AutoFormat.RemoveEmpty.RemoveNbsp'       => TRUE,
+                'AutoFormat.RemoveEmpty' => FALSE,
+                'Attr.AllowedFrameTargets' => ['_blank'],
+                'AutoFormat.RemoveEmpty.RemoveNbsp' => TRUE,
                 'AutoFormat.RemoveSpansWithoutAttributes' => TRUE,
-                'Cache.SerializerPath'                    => \sys_get_temp_dir(),
-                'Core.RemoveProcessingInstructions'       => TRUE,
-                'HTML.Doctype'                            => 'HTML 4.01 Transitional',
-                'URI.AllowedSchemes'                      => ['http', 'https', 'mailto', 'tel'],
-                'URI.DefaultScheme'                       => 'https',
-                'URI.DisableExternalResources'            => TRUE,
+                'Cache.SerializerPath' => sys_get_temp_dir(),
+                'Core.RemoveProcessingInstructions' => TRUE,
+                'HTML.Doctype' => 'HTML 4.01 Transitional',
+                'URI.AllowedSchemes' => ['http', 'https', 'mailto', 'tel'],
+                'URI.DefaultScheme' => 'https',
+                'URI.DisableExternalResources' => TRUE,
             ]
         );
     }

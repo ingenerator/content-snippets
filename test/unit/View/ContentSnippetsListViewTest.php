@@ -10,13 +10,12 @@ namespace test\unit\Ingenerator\ContentSnippets\View;
 use Ingenerator\ContentSnippets\Entity\ContentSnippet;
 use Ingenerator\ContentSnippets\Repository\ArrayContentSnippetRepository;
 use Ingenerator\ContentSnippets\View\BaseContentSnippetsListView;
+use PHPUnit\Framework\TestCase;
 
-class ContentSnippetsListViewTest extends \PHPUnit\Framework\TestCase
+class ContentSnippetsListViewTest extends TestCase
 {
-    /**
-     * @var \Ingenerator\ContentSnippets\Repository\ArrayContentSnippetRepository
-     */
-    protected $snippets_repo;
+
+    private ArrayContentSnippetRepository $snippets_repo;
 
     public function test_it_is_initialisable()
     {
@@ -27,44 +26,44 @@ class ContentSnippetsListViewTest extends \PHPUnit\Framework\TestCase
     {
         $this->snippets_repo = ArrayContentSnippetRepository::with(
             [
-                'slug'         => 'something',
+                'slug' => 'something',
                 'display_name' => 'Our - First one',
-                'content'      => '<p>Here is the introductory text</p>',
+                'content' => '<p>Here is the introductory text</p>',
             ],
             [
-                'slug'         => 'something-else',
+                'slug' => 'something-else',
                 'display_name' => 'First alphabetically',
-                'content'      => '<h3>This one has</h3><p>A lot of longer text and it goes on and on for ages with loads of content that would blow up the table</p>',
+                'content' => '<h3>This one has</h3><p>A lot of longer text and it goes on and on for ages with loads of content that would blow up the table</p>',
             ],
             [
-                'slug'         => 'new-one',
+                'slug' => 'new-one',
                 'display_name' => 'New',
-                'content'      => NULL,
+                'content' => NULL,
             ]
         );
 
         $this->assertEquals(
             [
                 [
-                    'edit_url'        => '/edit/something-else',
-                    'display_name'    => 'First alphabetically',
+                    'edit_url' => '/edit/something-else',
+                    'display_name' => 'First alphabetically',
                     'content_excerpt' => 'This one has A lot of longer text and it goes on and on for…',
-                    'has_content'     => TRUE,
-                    'row_class'       => '',
+                    'has_content' => TRUE,
+                    'row_class' => '',
                 ],
                 [
-                    'edit_url'        => '/edit/new-one',
-                    'display_name'    => 'New',
+                    'edit_url' => '/edit/new-one',
+                    'display_name' => 'New',
                     'content_excerpt' => '',
-                    'has_content'     => FALSE,
-                    'row_class'       => 'warning',
+                    'has_content' => FALSE,
+                    'row_class' => 'warning',
                 ],
                 [
-                    'edit_url'        => '/edit/something',
-                    'display_name'    => 'Our - First one',
+                    'edit_url' => '/edit/something',
+                    'display_name' => 'Our - First one',
                     'content_excerpt' => 'Here is the introductory text',
-                    'has_content'     => TRUE,
-                    'row_class'       => '',
+                    'has_content' => TRUE,
+                    'row_class' => '',
                 ],
             ],
             $this->newSubject()->snippet_rows
@@ -77,7 +76,7 @@ class ContentSnippetsListViewTest extends \PHPUnit\Framework\TestCase
         $this->snippets_repo = ArrayContentSnippetRepository::withNothing();
     }
 
-    protected function newSubject()
+    protected function newSubject(): ImplementedContentSnippetsListView
     {
         return new ImplementedContentSnippetsListView($this->snippets_repo);
     }
@@ -87,7 +86,7 @@ class ContentSnippetsListViewTest extends \PHPUnit\Framework\TestCase
 
 class ImplementedContentSnippetsListView extends BaseContentSnippetsListView
 {
-    protected function getEditUrl(ContentSnippet $snippet)
+    protected function getEditUrl(ContentSnippet $snippet): string
     {
         return '/edit/'.$snippet->getSlug();
     }

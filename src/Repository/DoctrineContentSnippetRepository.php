@@ -13,17 +13,17 @@ use Ingenerator\ContentSnippets\UndefinedSnippetException;
 
 class DoctrineContentSnippetRepository implements ContentSnippetRepository
 {
-    /**
-     * @var \Doctrine\ORM\EntityManagerInterface
-     */
-    protected $em;
 
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
+    public function __construct(
+        protected readonly EntityManagerInterface $em
+    ) {
+
     }
 
-    public function listAll()
+    /**
+     * {@inheritdoc}
+     */
+    public function listAll(): array
     {
         return $this->em->getRepository(ContentSnippet::class)->findAll();
     }
@@ -31,7 +31,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
     /**
      * {@inheritdoc}
      */
-    public function load($slug)
+    public function load(string $slug): ContentSnippet
     {
         $snippet = $this->em->createQueryBuilder()
             ->select('snippet')
@@ -44,13 +44,14 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
         if ( ! $snippet) {
             throw new UndefinedSnippetException($slug);
         }
+
         return $snippet;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getContent($slug)
+    public function getContent(string $slug): ?string
     {
         return $this->load($slug)->getContent();
     }
@@ -58,7 +59,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
     /**
      * {@inheritdoc}
      */
-    public function hasContent($slug)
+    public function hasContent(string $slug): bool
     {
         return $this->load($slug)->hasContent();
     }
@@ -66,7 +67,7 @@ class DoctrineContentSnippetRepository implements ContentSnippetRepository
     /**
      * {@inheritdoc}
      */
-    public function save(ContentSnippet $snippet)
+    public function save(ContentSnippet $snippet): void
     {
         $this->em->persist($snippet);
         $this->em->flush($snippet);
