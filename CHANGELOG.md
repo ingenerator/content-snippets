@@ -1,5 +1,9 @@
 ### Unreleased
 
+### v2.0.1 (2024-12-13)
+
+* Fix missing imports for behat step definitions broken in 2.0.0
+
 ### v2.0.0 (2024-12-13)
 
 * [BREAKING] Use doctrine attributes instead of annotations for entity metadata

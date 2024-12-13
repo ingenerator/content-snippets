@@ -10,6 +10,8 @@ namespace Ingenerator\ContentSnippets\BehatContexts;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Ingenerator\ContentSnippets\Repository\ContentSnippetRepository;
 use PHPUnit\Framework\Assert;
 use function trim;
