@@ -1,5 +1,7 @@
 ### Unreleased
 
+### v2.0.0 (2024-12-13)
+
 * [BREAKING] Use doctrine attributes instead of annotations for entity metadata
 * [BREAKING] Add hard parameter and return typehints to all classes
 * [BREAKING] ContentSnippetContentFilter is now an interface, use HtmlPurifierContentFilter for 
