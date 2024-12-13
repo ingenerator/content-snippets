@@ -187,7 +187,7 @@ HTML;
         return new HtmlPurifierContentFilter($this->purifier);
     }
 
-    protected function assertFiltersValidAndNotModified(string $content, ContentSnippet $snippet)
+    protected function assertFiltersValidAndNotModified(?string $content, ContentSnippet $snippet)
     {
         $this->assertEquals(
             new ContentFilterResult(

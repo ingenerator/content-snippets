@@ -3,28 +3,20 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          bootstrap="test/bootstrap.php"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         convertDeprecationsToExceptions="true"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+         failOnDeprecation="true"
+         failOnNotice="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         displayDetailsOnIncompleteTests="true"
+         displayDetailsOnSkippedTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd">
     <testsuites>
         <testsuite name="Unit">
             <directory>test/unit</directory>
         </testsuite>
     </testsuites>
-    <listeners>
-        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener">
-            <arguments>
-                <array>
-                    <element key="slowThreshold">
-                        <integer>200</integer>
-                    </element>
-                    <element key="reportLength">
-                        <integer>20</integer>
-                    </element>
-                </array>
-            </arguments>
-        </listener>
-    </listeners>
 </phpunit>
