@@ -5,6 +5,7 @@
 * [BREAKING] ContentSnippetContentFilter is now an interface, use HtmlPurifierContentFilter for 
   a runtime implementation. The ->filterContent now returns a ContentFilterResult DTO instead of
   a plain array.
+* Internal test & config files are now excluded from distribution archives
 * Upgraded to PHPUnit 11 for internal tests
 
 ### v1.5.0 (2024-10-01)
