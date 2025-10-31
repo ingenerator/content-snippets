@@ -23,18 +23,18 @@ use function trim;
 
 /**
  * @package Ingenerator\ContentSnippets\View
- *
- * @property-read array $snippet_rows
  */
 abstract class BaseContentSnippetsListView extends AbstractViewModel
 {
 
+    public array $snippet_rows {
+        get => $this->var_snippet_rows();
+    }
     protected int $excerpt_word_limit = 15;
 
     public function __construct(
         protected readonly ContentSnippetRepository $snippets_repo
     ) {
-        parent::__construct();
     }
 
     protected function var_snippet_rows(): array
