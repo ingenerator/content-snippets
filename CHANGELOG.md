@@ -1,5 +1,10 @@
 ### Unreleased
 
+### v3.0.0-alpha (2025-11-03)
+
+* Drop support for PHP < 8.4
+* Upgrade to ingenerator/kohana-view@5.x - this involves breaking changes to the internal API of the ViewModel classes.
+
 ### v2.1.1 (2025-07-29)
 
 * Support composer/installers^2
