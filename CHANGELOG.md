@@ -1,5 +1,7 @@
 ### Unreleased
 
+* Run tests without koharness
+
 ### v3.0.0-alpha (2025-11-03)
 
 * Drop support for PHP < 8.4

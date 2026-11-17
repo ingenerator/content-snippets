@@ -20,7 +20,7 @@
     "ingenerator/kohana-view": "^5.0@alpha"
   },
   "require-dev": {
-    "kohana/koharness": "dev-master",
+    "ext-mbstring": "*",
     "phpunit/phpunit": "^11.5"
   },
   "repositories": [
