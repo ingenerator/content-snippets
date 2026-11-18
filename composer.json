@@ -12,9 +12,10 @@
     }
   ],
   "require": {
-    "composer/installers": "^1.12 || ^2",
-    "ezyang/htmlpurifier": "^4.15",
     "php": ">=8.4 <8.5",
+    "composer/installers": "^1.12 || ^2",
+    "doctrine/orm": "^2.20",
+    "ezyang/htmlpurifier": "^4.15",
     "ingenerator/kohana-core": "^4.7",
     "ingenerator/kohana-extras": "^2.0 || ^3.0",
     "ingenerator/kohana-view": "^5.0@alpha"
