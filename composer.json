@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "php": ">=8.4 <8.5",
+    "php": ">=8.4 <8.6",
     "composer/installers": "^1.12 || ^2",
     "doctrine/orm": "^2.20",
     "ezyang/htmlpurifier": "^4.15",
