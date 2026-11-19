@@ -12,16 +12,16 @@
     }
   ],
   "require": {
-    "composer/installers": "^1.12 || ^2",
-    "ezyang/htmlpurifier": "^4.15",
-    "php": ">=8.4 <8.5",
-    "ingenerator/kohana-core": "^4.7",
-    "ingenerator/kohana-extras": "^2.0 || ^3.0",
-    "ingenerator/kohana-view": "^5.0@alpha"
+    "php": ">=8.4 <8.6",
+    "doctrine/orm": "^2.20 || ^3.0",
+    "ezyang/htmlpurifier": "^4.19.1",
+    "ingenerator/kohana-core": "^4.14",
+    "ingenerator/kohana-extras": "^4.0",
+    "ingenerator/kohana-view": "^5.0"
   },
   "require-dev": {
-    "kohana/koharness": "dev-master",
-    "phpunit/phpunit": "^11.5"
+    "ext-mbstring": "*",
+    "phpunit/phpunit": "^13.4"
   },
   "repositories": [
     {
@@ -36,16 +36,6 @@
   },
   "config": {
     "preferred-install": "dist",
-    "sort-packages": true,
-    "allow-plugins": {
-      "composer/installers": true
-    }
-  },
-  "extra": {
-    "installer-paths": {
-      "vendor/{$vendor}/{$name}": [
-        "type:kohana-module"
-      ]
-    }
+    "sort-packages": true
   }
 }

@@ -1,5 +1,11 @@
 ### Unreleased
 
+### v3.0.0 (2026-11-18)
+
+* Support PHP 8.5
+* Require doctrine/orm as library has always had a dependency on it
+* Run tests without koharness
+
 ### v3.0.0-alpha (2025-11-03)
 
 * Drop support for PHP < 8.4
